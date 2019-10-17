@@ -15,3 +15,9 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes(['register' => false]);
 
+Route::namespace('Api')->group(function () {
+    Route::get('/categories', 'CategoryController@getList')->name('categories');
+    Route::get('/news/{cnt}/{categoryId?}', 'NewsController@getList')
+        ->name('news')
+        ->where(['cnt' => '\d+', 'categoryId' => '\d+']);
+});
