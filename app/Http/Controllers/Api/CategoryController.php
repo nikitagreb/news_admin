@@ -11,6 +11,7 @@ class CategoryController extends Controller
     public function getList()
     {
         header('Access-Control-Allow-Origin: ' . env('APP_URL_FRONT'));
+        
         return DB::connection('mysqlConsole')
             ->table('category')
             ->select(DB::raw('category.*, count(news.id) as news_count'))

@@ -10,6 +10,7 @@ class NewsController extends Controller
     public function getList($cnt, $categoryId = null)
     {
         header('Access-Control-Allow-Origin: ' . env('APP_URL_FRONT'));
+
         $builder = News::where('status', '=', News::STATUS_PUBLISHED)
             ->with(['category', 'source']);
 
