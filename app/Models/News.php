@@ -35,6 +35,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\News whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property-read \App\Models\Source $source
+ * @property string $slug Псевдоним для ссылки
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\News whereSlug($value)
  */
 class News extends Model
 {
