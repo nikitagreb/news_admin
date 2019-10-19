@@ -23,10 +23,16 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $slug Псевдоним для ссылки
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category whereSlug($value)
  */
 class Category extends Model
 {
     protected $connection = 'mysqlConsole';
 
     protected $table = 'category';
+
+    protected $fillable = [
+        'name', 'title', 'description', 'slug',
+    ];
 }
