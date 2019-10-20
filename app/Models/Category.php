@@ -35,4 +35,10 @@ class Category extends Model
     protected $fillable = [
         'name', 'title', 'description', 'slug',
     ];
+
+    public static function dropDownList()
+    {
+        $categories = Category::select(['name', 'id'])->get();
+
+    }
 }
