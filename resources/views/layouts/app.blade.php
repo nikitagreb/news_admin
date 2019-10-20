@@ -39,6 +39,11 @@
                                    href="{{ route('admin.categories.index') }}">Категории
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" class="{{ request()->is('admin/sources/*') ? 'active' : '' }}"
+                                   href="{{ route('admin.sources.index') }}">Ресурсы
+                                </a>
+                            </li>
                         </ul>
                     @endif
                     <!-- Right Side Of Navbar -->

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\Categories\{StoreRequest, UpdateRequest};
 use Illuminate\Support\Str;
+use App\Http\Requests\Categories\{StoreRequest, UpdateRequest};
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 
@@ -40,7 +40,7 @@ class CategoryController extends Controller
             'slug' => Str::slug($request['name'], '-'),
         ]);
 
-        return redirect()->route('admin.categories.show', ['category' => $category]);
+        return redirect()->route('admin.categories.show', compact('category'));
     }
 
     /**
