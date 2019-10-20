@@ -27,4 +27,8 @@ class Source extends Model
     protected $connection = 'mysqlConsole';
     /** @var string */
     protected $table = 'parse_source';
+
+    protected $fillable = [
+        'name', 'site',
+    ];
 }

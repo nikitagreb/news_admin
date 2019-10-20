@@ -2,72 +2,73 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Source;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Sources\{StoreRequest, UpdateRequest};
 
 class SourceController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        //
+        $sources = Source::paginate(20);
+
+        return view('admin.sources.index', compact('sources'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        //
+        return view('admin.sources.create');
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
+     * @param StoreRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store(StoreRequest $request)
     {
-        //
+        $source = Source::create([
+            'name' => $request['name'],
+            'site' => $request['site'],
+        ]);
+
+        return redirect()->route('admin.sources.show', compact('source'));
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
+     * @param Source $source
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id)
+    public function show(Source $source)
     {
-        //
+        return view('admin.sources.show', compact('source'));
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
+     * @param Source $source
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Source $source)
     {
-        //
+        return view('admin.sources.edit', compact('source'));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
+     * @param UpdateRequest $request
+     * @param Source $source
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($id)
+    public function update(UpdateRequest $request, Source $source)
     {
-        //
+        $source->update($request->only(['name', 'site']));
+
+        return redirect()->route('admin.sources.show', compact('source'));
+
     }
 
     /**
