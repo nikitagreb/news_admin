@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Source;
 use App\Http\Requests\ParseCategory\{StoreRequest, UpdateRequest};
-use App\Models\ParseCategory;
+use App\Models\{Category, Source, ParseCategory};
 
 class ParseCategoryController extends Controller
 {
