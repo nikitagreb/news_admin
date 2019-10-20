@@ -21,9 +21,9 @@
             <thead>
             <tr>
                 <td>ID</td>
-                <td>Name</td>
-                <td>Site</td>
-                <td>Actions</td>
+                <td>Название</td>
+                <td>Сайт</td>
+                <td></td>
             </tr>
             </thead>
             <tbody>
