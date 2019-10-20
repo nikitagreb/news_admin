@@ -14,6 +14,20 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ParseCategory newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ParseCategory query()
  * @mixin \Eloquent
+ * @property int $category_id Категория
+ * @property int $source_id Источник
+ * @property string $link Ссылка на страницу категории
+ * @property string $linkSelector Css селектор для ссылки
+ * @property string $status Статус
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ParseCategory whereCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ParseCategory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ParseCategory whereLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ParseCategory whereLinkSelector($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ParseCategory whereSourceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ParseCategory whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ParseCategory whereUpdatedAt($value)
  */
 class ParseCategory extends Model
 {
@@ -22,6 +36,13 @@ class ParseCategory extends Model
 
     protected $connection = 'mysqlConsole';
 
+    /** @var string */
+    protected $table = 'parse_category';
+
+    protected $fillable = [
+        'link','linkSelector', 'status', 'category_id', 'source_id',
+    ];
+
     public function source()
     {
         return $this->belongsTo(Source::class);
@@ -29,7 +50,7 @@ class ParseCategory extends Model
 
     public function category()
     {
-        return $this->belongsTo(Source::class);
+        return $this->belongsTo(Category::class);
     }
 
     protected function setKeysForSaveQuery(Builder $query)

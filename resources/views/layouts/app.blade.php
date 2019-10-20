@@ -44,6 +44,16 @@
                                    href="{{ route('admin.sources.index') }}">Ресурсы
                                 </a>
                             </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarParser" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Парсер
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarParser">
+                                    <a class="dropdown-item" href="{{ route('admin.parse-categories.index') }}">
+                                        Ссылки на категории
+                                    </a>
+                                </div>
+                            </li>
                         </ul>
                     @endif
                     <!-- Right Side Of Navbar -->

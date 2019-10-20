@@ -3,71 +3,96 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Source;
+use App\Http\Requests\ParseCategory\{StoreRequest, UpdateRequest};
+use App\Models\ParseCategory;
 
 class ParseCategoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        //
+        $categories = ParseCategory::with(['category', 'source'])->paginate(20);
+
+        return view('admin.parse-categories.index', compact('categories'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        //
+        $categories = Category::select(['name', 'id'])->get();
+        $sources = Source::select(['name', 'id'])->get();
+
+        return view('admin.parse-categories.create', compact('categories', 'sources'));
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
+     * @param StoreRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store(StoreRequest $request)
     {
-        //
+        $category = ParseCategory::create([
+            'category_id' => $request['category_id'],
+            'source_id' => $request['source_id'],
+            'link' => $request['link'],
+            'linkSelector' => $request['linkSelector'],
+            'status' => ParseCategory::STATUS_NEW,
+        ]);
+
+        return redirect()->route('admin.parse-categories.show', [
+            'category_id' => $category->category_id,
+            'source_id' => $category->source_id,
+        ]);
+
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
+     * @param $category_id
+     * @param $source_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id)
+    public function show($category_id, $source_id)
     {
-        //
+        $category = $this->findCategory($category_id, $source_id);
+
+        return view('admin.parse-categories.show', compact('category'));
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
+     * @param $category_id
+     * @param $source_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit($category_id, $source_id)
     {
-        //
+        $category = $this->findCategory($category_id, $source_id);
+        $categories = Category::select(['name', 'id'])->get();
+        $sources = Source::select(['name', 'id'])->get();
+
+        return view('admin.parse-categories.edit', compact('category', 'categories', 'sources'));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
+     * @param UpdateRequest $request
+     * @param $category_id
+     * @param $source_id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($id)
+    public function update(UpdateRequest $request, $category_id, $source_id)
     {
-        //
+        $category = $this->findCategory($category_id, $source_id);
+        $category->update($request->only(['linkSelector']));
+
+        return redirect()->route('admin.parse-categories.show', [
+            'category_id' => $category->category_id,
+            'source_id' => $category->source_id,
+        ]);
     }
 
     /**
@@ -76,8 +101,21 @@ class ParseCategoryController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($category_id, $source_id)
     {
-        //
+        // soft
+    }
+
+    /**
+     * @param $category_id
+     * @param $source_id
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model\
+     */
+    private function findCategory($category_id, $source_id)
+    {
+        return ParseCategory::where('category_id', $category_id)
+            ->with(['category', 'source'])
+            ->where('source_id', $source_id)
+            ->firstOrFail();
     }
 }
