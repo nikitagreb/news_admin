@@ -57,4 +57,15 @@ class ParseLinkNews extends Model
     {
         return $this->source->site . $this->link;
     }
+
+    public function getStatusName(): string
+    {
+        $list = [
+            static::STATUS_NEW => 'Новая',
+            static::STATUS_LOADED => 'Загружено',
+            static::STATUS_ERROR => 'Ошибка',
+        ];
+
+        return $list[$this->status];
+    }
 }

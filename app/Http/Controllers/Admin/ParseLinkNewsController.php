@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ParseLinkNews;
 use Illuminate\Http\Request;
 
 class ParseLinkNewsController extends Controller
@@ -14,7 +15,9 @@ class ParseLinkNewsController extends Controller
      */
     public function index()
     {
-        //
+        $linkNews = ParseLinkNews::with(['category', 'source'])->orderBy('id', 'desc')->paginate(20);
+
+        return view('admin.parse-link-news.index', compact('linkNews'));
     }
 
     /**
