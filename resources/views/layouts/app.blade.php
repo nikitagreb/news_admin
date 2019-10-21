@@ -48,9 +48,12 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarParser" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Парсер
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarParser">
+                                <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{{ route('admin.parse-categories.index') }}">
                                         Ссылки на категории
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('admin.parse-link-news.index') }}">
+                                        Ссылки для новостей
                                     </a>
                                 </div>
                             </li>
