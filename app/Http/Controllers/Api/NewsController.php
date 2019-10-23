@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Category;
 use App\Models\News;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class NewsController extends Controller
 {
@@ -26,7 +28,18 @@ class NewsController extends Controller
             ->orderBy('id', 'desc');
 
         if ($categoryAlias !== null) {
-            $builder->where('slug', '=', $categoryAlias);
+
+            $category = DB::connection('mysqlConsole')
+                ->table('category')
+                ->select(['id'])
+                ->where('slug', '=', $categoryAlias)
+                ->first();
+
+            if ($category === null) {
+                abort(404);
+            }
+
+            $builder->where('category_id', '=', $category->id);
         }
 
         return $builder->simplePaginate($cnt);
