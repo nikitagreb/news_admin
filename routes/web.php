@@ -17,9 +17,12 @@ Auth::routes(['register' => false]);
 
 Route::namespace('Api')->group(function () {
     Route::get('categories', 'CategoryController@getList')->name('categories');
-    Route::get('news/{cnt}/{categoryId?}', 'NewsController@getList')
+    Route::get('news/{cnt}/{categoryAlias?}', 'NewsController@getList')
         ->name('news')
-        ->where(['cnt' => '\d+', 'categoryId' => '\d+']);
+        ->where(['cnt' => '\d+', 'categoryAlias' => '\w+']);
+    Route::get('news/view/{id}', 'NewsController@view')
+        ->name('news.view')
+        ->where(['id' => '\d+']);
 });
 
 Route::middleware('auth')->namespace('Admin')->prefix('admin')->as('admin.')->group(function () {
