@@ -2,23 +2,38 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\News;
+use App\Http\Controllers\Controller;
 
 class NewsController extends Controller
 {
-    public function getList($cnt, $categoryId = null)
+    public function getList($cnt, $categoryAlias = null)
     {
         header('Access-Control-Allow-Origin: ' . env('APP_URL_FRONT'));
 
-        $builder = News::where('status', '=', News::STATUS_PUBLISHED)
+        $builder = News::select([
+                'id',
+                'category_id',
+                'source_id',
+                'title',
+                'description',
+                'image',
+                'link',
+                'slug',
+            ])
+            ->where('status', '=', News::STATUS_PUBLISHED)
             ->with(['category', 'source'])
             ->orderBy('id', 'desc');
 
-        if ($categoryId !== null) {
-            $builder->where('category_id', '=', $categoryId);
+        if ($categoryAlias !== null) {
+            $builder->where('slug', '=', $categoryAlias);
         }
 
         return $builder->simplePaginate($cnt);
+    }
+
+    public function view($id)
+    {
+        return News::findOrFail($id);
     }
 }
