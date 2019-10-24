@@ -19,7 +19,11 @@
                 </tr>
                 <tr>
                     <th>Сайт</th>
-                    <td>{{ $source->site }}</td>
+                    <td>
+                        <a href="{{ $source->site }}">
+                            {{ $source->site }}
+                        </a>
+                    </td>
                 </tr>
                 <tr>
                     <th>Дата создания</th>

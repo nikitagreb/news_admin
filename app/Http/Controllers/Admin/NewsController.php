@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -14,7 +15,9 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //
+        $news = News::with(['source', 'category'])->orderBy('id', 'desc')->paginate(20);
+
+        return view('admin.news.index', compact('news'));
     }
 
     /**
@@ -24,7 +27,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+        // need remove
     }
 
     /**
@@ -34,29 +37,25 @@ class NewsController extends Controller
      */
     public function store()
     {
-        //
+        // need remove
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
+     * @param News $news
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id)
+    public function show(News $news)
     {
-        //
+        return view('admin.news.show', compact('news'));
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
+     * @param News $news
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(News $news)
     {
-        //
+        return view('admin.sources.edit', compact('news'));
     }
 
     /**

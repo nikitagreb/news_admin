@@ -58,4 +58,19 @@ class News extends Model
     {
         return $this->belongsTo(Source::class);
     }
+
+    public function getStatusName(): string
+    {
+        $list = [
+            static::STATUS_PUBLISHED => 'Опубликовано',
+            static::STATUS_UNPUBLISHED => 'Не опубликовано',
+        ];
+
+        return $list[$this->status];
+    }
+
+    public function getFullLink()
+    {
+        return $this->source->site . $this->link;
+    }
 }

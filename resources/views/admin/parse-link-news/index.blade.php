@@ -29,8 +29,16 @@
                 @endphp
                 <tr>
                     <td>{{ $link->id }}</td>
-                    <td>{{ $link->category->name }}</td>
-                    <td>{{ $link->source->name }}</td>
+                    <td>
+                        <a href="{{ route('admin.categories.show', ['category' => $link->category]) }}">
+                            {{ $link->category->name }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ route('admin.sources.show', ['source' => $link->source]) }}">
+                            {{ $link->source->name }}
+                        </a>
+                    </td>
                     <td>{{ $link->title }}</td>
                     <td>{{ $link->link }}</td>
                     <td>{{ $link->getStatusName() }}</td>
