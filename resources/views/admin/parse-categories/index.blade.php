@@ -33,8 +33,16 @@
                 /** @var \App\Models\ParseCategory $parseCategory */
                 @endphp
                 <tr>
-                    <td>{{ $parseCategory->category->name }}</td>
-                    <td>{{ $parseCategory->source->name }}</td>
+                    <td>
+                        <a href="{{ route('admin.categories.show', ['category' => $parseCategory->category]) }}">
+                            {{ $parseCategory->category->name }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ route('admin.sources.show', ['source' => $parseCategory->source]) }}">
+                            {{ $parseCategory->source->name }}
+                        </a>
+                    </td>
                     <td>{{ $parseCategory->link }}</td>
                     <td>{{ $parseCategory->linkSelector }}</td>
                     <td>

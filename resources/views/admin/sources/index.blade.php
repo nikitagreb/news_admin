@@ -34,7 +34,11 @@
                 <tr>
                     <td>{{ $source->id }}</td>
                     <td>{{ $source->name }}</td>
-                    <td>{{ $source->site }}</td>
+                    <td>
+                        <a href="{{ $source->site }}">
+                            {{ $source->site }}
+                        </a>
+                    </td>
                     <td>
                         <div class="btn-group-sm">
                             <a class="btn btn-success" href="{{ route('admin.sources.show', compact('source')) }}">

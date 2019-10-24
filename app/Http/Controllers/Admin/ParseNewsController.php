@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\ParseNews;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class ParseNewsController extends Controller
 {
@@ -14,7 +14,9 @@ class ParseNewsController extends Controller
      */
     public function index()
     {
-        //
+        $news = ParseNews::with(['source'])->orderBy('id', 'desc')->paginate(20);
+
+        return view('admin.parse-news.index', compact('news'));
     }
 
     /**
