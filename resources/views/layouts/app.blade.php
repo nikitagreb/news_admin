@@ -36,16 +36,25 @@
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
                                 <a class="nav-link" class="{{ request()->is('admin/categories/*') ? 'active' : '' }}"
-                                   href="{{ route('admin.categories.index') }}">Категории
+                                   href="{{ route('admin.categories.index') }}">
+                                    Категории
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" class="{{ request()->is('admin/sources/*') ? 'active' : '' }}"
-                                   href="{{ route('admin.sources.index') }}">Ресурсы
+                                   href="{{ route('admin.sources.index') }}">
+                                    Ресурсы
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" class="{{ request()->is('admin/news/*') ? 'active' : '' }}"
+                                   href="{{ route('admin.news.index') }}">
+                                    Новости
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarParser" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarParser" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Парсер
                                 </a>
                                 <div class="dropdown-menu">
@@ -54,6 +63,9 @@
                                     </a>
                                     <a class="dropdown-item" href="{{ route('admin.parse-link-news.index') }}">
                                         Ссылки для новостей
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('admin.parse-news.index') }}">
+                                        Данные для парсинга новостей
                                     </a>
                                 </div>
                             </li>
