@@ -46,6 +46,8 @@ class NewsController extends Controller
 
     public function view($id)
     {
+        header('Access-Control-Allow-Origin: ' . env('APP_URL_FRONT'));
+
         return News::findOrFail($id);
     }
 }
