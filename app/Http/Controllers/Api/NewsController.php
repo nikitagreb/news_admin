@@ -48,6 +48,6 @@ class NewsController extends Controller
     {
         header('Access-Control-Allow-Origin: ' . env('APP_URL_FRONT'));
 
-        return News::findOrFail($id);
+        return News::with(['category', 'source'])->findOrFail($id);
     }
 }
