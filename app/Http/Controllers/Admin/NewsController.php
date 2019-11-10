@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use App\Models\Category;
 use App\Models\News;
 use App\Http\Controllers\Controller;
 use App\Models\Source;
-use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 
 
 class NewsController extends Controller
