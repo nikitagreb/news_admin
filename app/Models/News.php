@@ -61,16 +61,19 @@ class News extends Model
 
     public function getStatusName(): string
     {
-        $list = [
-            static::STATUS_PUBLISHED => 'Опубликовано',
-            static::STATUS_UNPUBLISHED => 'Не опубликовано',
-        ];
-
-        return $list[$this->status];
+        return self::statusList()[$this->status];
     }
 
     public function getFullLink()
     {
         return $this->source->site . $this->link;
+    }
+
+    public static function statusList(): array
+    {
+        return [
+            static::STATUS_PUBLISHED => 'Опубликовано',
+            static::STATUS_UNPUBLISHED => 'Не опубликовано',
+        ];
     }
 }
